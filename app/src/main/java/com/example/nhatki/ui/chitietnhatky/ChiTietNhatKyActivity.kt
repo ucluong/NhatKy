@@ -2,7 +2,7 @@ package com.example.nhatki.ui.chitietnhatky
 
 import com.example.nhatki.R
 import com.example.nhatki.base.BaseActivity
-import com.example.nhatki.data.model.NhatKy
+import com.example.nhatki.data.nhatky.entiry.NhatKy
 import kotlinx.android.synthetic.main.activity_chitiet_nhatky.*
 
 class ChiTietNhatKyActivity : BaseActivity(R.layout.activity_chitiet_nhatky) {

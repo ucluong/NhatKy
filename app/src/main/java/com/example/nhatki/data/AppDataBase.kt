@@ -1,11 +1,11 @@
 package com.example.nhatki.data
 
-import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.nhatki.data.model.NhatKy
-import com.example.nhatki.data.model.NhatKyDao
+import com.example.nhatki.data.nhatky.entiry.NhatKy
+import com.example.nhatki.data.nhatky.dao.NhatKyDao
+import com.example.nhatki.utils.MyApplication
 
 @Database(entities = [NhatKy::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
@@ -13,11 +13,11 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private var INSTANCE: AppDatabase? = null
-        fun getDatabase(context: Context): AppDatabase {
+        fun getDatabase(): AppDatabase {
             if (INSTANCE == null) {
                 synchronized(this) {
                     INSTANCE =
-                        Room.databaseBuilder(context,AppDatabase::class.java, "app_data_base")
+                        Room.databaseBuilder(MyApplication.applicationContext(),AppDatabase::class.java, "app_data_base")
                             .build()
                 }
             }

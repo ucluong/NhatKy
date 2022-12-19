@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.nhatki.R
-import com.example.nhatki.data.model.NhatKy
+import com.example.nhatki.data.nhatky.entiry.NhatKy
 import kotlinx.android.synthetic.main.item_nhatky.view.*
 
 class NhatKyAdapter (val onItemClick : (NhatKy) -> Unit)  : RecyclerView.Adapter<NhatKyAdapter.ViewHolder>() {
