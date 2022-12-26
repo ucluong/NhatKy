@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NhatKi</string>
+    <string name="ok">Ok</string>
+    <string name="camcel">cancel</string>
 </resources>

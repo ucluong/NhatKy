@@ -8,6 +8,7 @@ import androidx.room.PrimaryKey
 class NhatKy(
     @PrimaryKey(autoGenerate = true)
     val id : Int = 0 ,
-    val tenNhatKy: String, val noiDung: String, val ngayViet: String) :
+    val tenNhatKy: String,
+    val noiDung: String, val ngayViet: String) :
     java.io.Serializable {
 }

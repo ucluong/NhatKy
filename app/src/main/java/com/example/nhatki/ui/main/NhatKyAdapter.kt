@@ -9,7 +9,7 @@ import com.example.nhatki.R
 import com.example.nhatki.data.nhatky.entiry.NhatKy
 import kotlinx.android.synthetic.main.item_nhatky.view.*
 
-class NhatKyAdapter (val onItemClick : (NhatKy) -> Unit)  : RecyclerView.Adapter<NhatKyAdapter.ViewHolder>() {
+class NhatKyAdapter (val onItemClick : (NhatKy) -> Unit, val onLongCLick: (NhatKy) -> Unit)  : RecyclerView.Adapter<NhatKyAdapter.ViewHolder>() {
     var data = mutableListOf<NhatKy>()
     @SuppressLint("NotifyDataSetChanged")
     set(value) {
@@ -37,6 +37,11 @@ class NhatKyAdapter (val onItemClick : (NhatKy) -> Unit)  : RecyclerView.Adapter
 
             itemView.setOnClickListener {
                 onItemClick.invoke(data)
+            }
+
+            itemView.setOnLongClickListener {
+                onLongCLick.invoke(data)
+                true
             }
         }
     }

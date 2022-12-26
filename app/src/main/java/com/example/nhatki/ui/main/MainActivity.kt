@@ -6,21 +6,32 @@ import com.example.nhatki.base.BaseActivity
 import com.example.nhatki.data.AppDatabase
 import com.example.nhatki.ui.chitietnhatky.ChiTietNhatKyActivity
 import com.example.nhatki.ui.vietnhatKy.VietNhatKyActrivity
+import com.example.nhatki.utils.showAlertDialog
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.toolbar_custom.*
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : BaseActivity(R.layout.activity_main) {
     private val database = AppDatabase.getDatabase()
 
     private val nhatKyAdapter by lazy {
-        NhatKyAdapter {
-            //click 1 item sẽ nhảy vào đây.
-            val intent = Intent(this, ChiTietNhatKyActivity::class.java).apply {
-                putExtra(ChiTietNhatKyActivity.KEY_DATA, it)
-            }
-            startActivity(intent)
+        NhatKyAdapter(
+            onItemClick = {
+                //click 1 item sẽ nhảy vào đây.
+                val intent = Intent(this, ChiTietNhatKyActivity::class.java).apply {
+                    putExtra(ChiTietNhatKyActivity.KEY_DATA, it)
+                }
+                startActivity(intent)
 
-        }
+            },
+            onLongCLick = {
+                showAlertDialog(this, message = "Bạn có chắc muốn xóa iteam ${it.tenNhatKy}"){
+                    GlobalScope.launch {
+                        database.nhatKyDao().delete(it)
+                    }
+                }
+            })
     }
 
 
@@ -37,13 +48,15 @@ class MainActivity : BaseActivity(R.layout.activity_main) {
 
     override fun initViews() {
 
-        database.nhatKyDao().getAll().observe(this){
+        database.nhatKyDao().getAll().observe(this) {
             nhatKyAdapter.data = it.toMutableList()
         }
 
         rvNhatKy.apply {
             adapter = nhatKyAdapter
         }
+
+
 
     }
 
